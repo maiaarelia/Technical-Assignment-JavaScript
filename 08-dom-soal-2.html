@@ -128,7 +128,7 @@
               ></textarea>
             </div>
             <div>
-              <button id="btn-submit" type="submit" class="btn btn-primary">
+              <button id="btn-submit" type="button" class="btn btn-primary">
                 submit
               </button>
               <button
@@ -166,7 +166,57 @@
       const elBtnCancel = document.querySelector('#btn-cancel');
       
       // EDIT HERE
+      document.getElementById("btn-comment").addEventListener("click", handleClick); 
+      function handleClick() {
+        document.getElementById("comment-form-section").className = "col-12";
+        document.getElementById("btn-comment").className = "d-none";
+      }
 
+      elBtnCancel.addEventListener("click", cancelBtn); 
+      function cancelBtn() {
+        document.getElementById("comment-form-section").className = "col-12 d-none";
+        document.getElementById("btn-comment").className = "btn btn-primary w-100 text-capitalize";
+        document.getElementById("input-username").value = "";
+        document.getElementById("input-comment").value = "";
+      }
+
+      elBtnSubmit.addEventListener("click", BtnSubmit); 
+      function BtnSubmit() {
+        document.getElementById("comment-form-section").className = "col-12 d-none"
+        document.getElementById("btn-comment").className = "btn btn-primary w-100 text-capitalize"
+        let username = document.getElementById("input-username").value
+        let comment = document.getElementById("input-comment").value
+        let li = document.createElement("li");
+        let div1 = document.createElement("div");
+        let div2 = document.createElement("div");
+        li.setAttribute("class", "list-group-item d-flex justify-content-between align-items-start");
+        div1.setAttribute("class", "ms-2 me-auto");
+        div2.setAttribute("class", "fw-bold text-capitalize");
+        div1.appendChild(div2);
+        li.appendChild(div1);
+        elCommentList.appendChild(li);
+        div2.innerHTML = username;
+        div1.innerHTML += comment;
+        console.log(username, comment);
+        document.getElementById("input-username").value = "";
+        document.getElementById("input-comment").value = "";
+      }
+  
     </script>
   </body>
 </html>
+
+<!-- Berikut adalah langkah-langkah pengerjaan yang dapat kalian lakukan:
+
+1. berikan eventListener pada comment button, ketika button tersebut ditekan maka kita akan menampilkan comment-form dengan cara menghapus 
+class d-none dari comment-form-section
+2. ketika user ingin mengirimkan komentar yang sudah ia tulis didalam comment-form, akan tetapi ingat bahwa form memiliki sebuah 
+"kebiasaan" dimana ia akan melakukan page refresh ketika ia disubmit. *(untuk mengetahui lebih lanjut tentang "kebiasaan" yang dimiliki oleh 
+form kamu dapat membaca sebuah aritkel singkat ini)
+3. ambil seluruh data yang telah di-masukan oleh user
+4. buat sebuah component menggunakan createElement, buat component tersebut seperti child element dari comment-list baik dari stuktur 
+DOM ataupun class yang digunakan
+5. isi commponent yang tadi sudah kamu buat dengan data yang telah kammu ambil dari comment form
+6. tempatkan component tersebut sebagai anak pertama dari comment-list
+7. sembunyikan comment form dengan menambahkan class dari Bootstrap yaitu d-none
+Agar proses pengerjaan lebih mudah, kami sudah menyiapkan template code yang dapat langsung kamu gunakan -->

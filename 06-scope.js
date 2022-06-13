@@ -19,7 +19,7 @@ function lari(){
   return jalan;
 }
 console.log(lari());
-console.log(jalan);
+
 
 /// => Global Scope
 const myNama = "Maia";
